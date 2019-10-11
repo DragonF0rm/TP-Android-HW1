@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="addListElemBtnHeight">48dp</dimen>
+    <dimen name="minListElemHeight">48dp</dimen>
+    <dimen name="minListElemWidth">48dp</dimen>
+    <dimen name="listElemTextSize">32sp</dimen>
+</resources>
