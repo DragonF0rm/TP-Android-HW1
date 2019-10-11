@@ -2,7 +2,9 @@ package com.example.tp_android_hw1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.tp_android_hw1.ListFragment.ListFragment;
 

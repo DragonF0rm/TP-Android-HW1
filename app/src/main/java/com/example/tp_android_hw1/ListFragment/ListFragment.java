@@ -69,8 +69,8 @@ public class ListFragment extends Fragment {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
+    public void onResume() {
+        super.onResume();
         Context context = getActivity();
         if (context != null) {
             Resources res = context.getResources();
