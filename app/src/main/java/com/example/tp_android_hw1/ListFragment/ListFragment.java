@@ -1,7 +1,6 @@
 package com.example.tp_android_hw1.ListFragment;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,14 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tp_android_hw1.NumberFragment.NumberFragment;
 import com.example.tp_android_hw1.NumberList.InteractiveNumberList;
 import com.example.tp_android_hw1.NumberList.NumberDataSource;
 import com.example.tp_android_hw1.R;
@@ -25,6 +26,7 @@ import static androidx.core.content.res.ResourcesCompat.getColor;
 
 public class ListFragment extends Fragment {
     private static final String COLUMN_COUNT_PARAM = "columnCount";
+    private static final String TRANSACTION_OPEN_NUMBER_FRAGMENT = "openNumberFragment";
     private GridLayoutManager mLayoutManager;
 
     @Nullable
@@ -53,17 +55,20 @@ public class ListFragment extends Fragment {
         InteractiveNumberList list = new InteractiveNumberList(
                 NumberDataSource.getInstance().getData(), colorNumberTypeEven, colorNumberTypeOdd,
                 (Integer value) -> {
-                    Toast.makeText(getActivity(), value.toString(), Toast.LENGTH_SHORT).show();
-                    //TODO call fragment 2
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+                    NumberFragment fragment = NumberFragment.newInstance(value);
+                    transaction.replace(R.id.fragment_container, fragment);
+                    transaction.addToBackStack(TRANSACTION_OPEN_NUMBER_FRAGMENT);
+                    transaction.commit();
                 });
         mLayoutManager = new GridLayoutManager(getActivity(), columnCount);
         listView.setLayoutManager(mLayoutManager);
         listView.setAdapter(list.mNumberListAdapter);
 
         Button addListElemBtn = view.findViewById(R.id.add_list_elem_btn);
-        addListElemBtn.setOnClickListener(v -> {
-            list.mNumberListAdapter.insertElem();
-        });
+        addListElemBtn.setOnClickListener(v -> list.mNumberListAdapter.insertElem());
 
         return view;
     }
