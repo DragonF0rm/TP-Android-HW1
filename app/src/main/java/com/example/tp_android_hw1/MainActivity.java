@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.tp_android_hw1.ListFragment.ListFragment;
+import com.example.tp_android_hw1.list_fragment.ListFragment;
 
 public class MainActivity extends AppCompatActivity {
     @Override
