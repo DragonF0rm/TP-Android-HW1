@@ -42,7 +42,7 @@ public class NumberFragment extends Fragment {
             colorNumberTypeEven = getColor(res, R.color.colorNumberEven, null);
             colorNumberTypeOdd = getColor(res, R.color.colorNumberOdd, null);
         } else {
-            Log.w(LOG_TAG, "NumberFragment has null activity attached");
+            Log.wtf(LOG_TAG, "NumberFragment has null activity attached");
         }
         int color = (number % 2 == 0) ? colorNumberTypeEven : colorNumberTypeOdd;
 

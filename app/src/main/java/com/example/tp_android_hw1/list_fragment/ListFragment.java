@@ -46,7 +46,7 @@ public class ListFragment extends Fragment {
             colorNumberTypeEven = getColor(res, R.color.colorNumberEven, null);
             colorNumberTypeOdd = getColor(res, R.color.colorNumberOdd, null);
         } else {
-            Log.w(LOG_TAG, "ListFragment has null activity attached");
+            Log.wtf(LOG_TAG, "ListFragment has null activity attached");
         }
 
         int columnCount = 1;
@@ -100,7 +100,7 @@ public class ListFragment extends Fragment {
             Resources res = context.getResources();
             LayoutManager.setSpanCount(res.getInteger(R.integer.listColumnCount));
         } else {
-            Log.w(LOG_TAG, "ListFragment has null activity attached");
+            Log.wtf(LOG_TAG, "ListFragment has null activity attached");
         }
     }
 
