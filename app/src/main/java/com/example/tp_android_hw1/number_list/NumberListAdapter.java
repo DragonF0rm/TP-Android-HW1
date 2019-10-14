@@ -38,11 +38,11 @@ class NumberViewHolder extends RecyclerView.ViewHolder {
 public class NumberListAdapter extends RecyclerView.Adapter<NumberViewHolder> {
     private static final int TYPE_EVEN = 0;
     private static final int TYPE_ODD = 1;
-    private int ColorTypeEven;
-    private int ColorTypeOdd;
-    private Random Random;
-    private Consumer<Integer> ElementOnClickCallback;
-    private ArrayList<Integer> Data;
+    private final int ColorTypeEven;
+    private final int ColorTypeOdd;
+    private final Random Random;
+    private final Consumer<Integer> ElementOnClickCallback;
+    private final ArrayList<Integer> Data;
 
     public NumberListAdapter(ArrayList<Integer> data, int colorNumberTypeEven, int colorNumberTypeOdd, Consumer<Integer> elementOnClickCallback) {
         Data = data;
