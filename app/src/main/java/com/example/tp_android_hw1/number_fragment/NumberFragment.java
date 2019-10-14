@@ -21,6 +21,7 @@ import static androidx.core.content.res.ResourcesCompat.getColor;
 
 public class NumberFragment extends Fragment {
     private static final String NUMBER_PARAM = "numberFragmentInt";
+    private static final String LOG_TAG = "NumberFragment";
 
     @Nullable
     @Override
@@ -41,7 +42,7 @@ public class NumberFragment extends Fragment {
             colorNumberTypeEven = getColor(res, R.color.colorNumberEven, null);
             colorNumberTypeOdd = getColor(res, R.color.colorNumberOdd, null);
         } else {
-            Log.w(getLogTag(), "NumberFragment has null activity attached");
+            Log.w(LOG_TAG, "NumberFragment has null activity attached");
         }
         int color = (number % 2 == 0) ? colorNumberTypeEven : colorNumberTypeOdd;
 
@@ -59,9 +60,5 @@ public class NumberFragment extends Fragment {
 
         fragment.setArguments(bundle);
         return fragment;
-    }
-
-    private static String getLogTag() {
-        return "NumberFragment";
     }
 }

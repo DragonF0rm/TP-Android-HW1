@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tp_android_hw1.number_fragment.NumberFragment;
-import com.example.tp_android_hw1.number_list.InteractiveNumberList;
 import com.example.tp_android_hw1.R;
+import com.example.tp_android_hw1.number_list.NumberListAdapter;
 
 import java.util.ArrayList;
 
@@ -28,9 +28,10 @@ import static androidx.core.content.res.ResourcesCompat.getColor;
 public class ListFragment extends Fragment {
     private static final String COLUMN_COUNT_PARAM = "columnCount";
     private static final String TRANSACTION_OPEN_NUMBER_FRAGMENT = "openNumberFragment";
-    private static final String LIST_DATA_BUNDLE_PART = "dataARrayList";
+    private static final String LIST_DATA_BUNDLE_PART = "dataArrayList";
+    private static final String LOG_TAG = "ListFragment";
     private GridLayoutManager LayoutManager;
-    private ArrayList<Integer> Data;
+    private NumberListAdapter Adapter;
 
     @Nullable
     @Override
@@ -45,7 +46,7 @@ public class ListFragment extends Fragment {
             colorNumberTypeEven = getColor(res, R.color.colorNumberEven, null);
             colorNumberTypeOdd = getColor(res, R.color.colorNumberOdd, null);
         } else {
-            Log.w(getLogTag(), "ListFragment has null activity attached");
+            Log.w(LOG_TAG, "ListFragment has null activity attached");
         }
 
         int columnCount = 1;
@@ -54,17 +55,18 @@ public class ListFragment extends Fragment {
             columnCount = arguments.getInt(COLUMN_COUNT_PARAM);
         }
 
+        ArrayList<Integer> data;
         if (savedInstanceState == null) {
-            Data = new ArrayList<Integer>();
+            data = new ArrayList<>();
             for (int i = 1; i < 100; i++) {
-                Data.add(i);
+                data.add(i);
             }
         } else {
-           Data = savedInstanceState.getIntegerArrayList(LIST_DATA_BUNDLE_PART);
+           data = savedInstanceState.getIntegerArrayList(LIST_DATA_BUNDLE_PART);
         }
 
         RecyclerView listView = view.findViewById(R.id.list);
-        InteractiveNumberList list = new InteractiveNumberList(Data, colorNumberTypeEven, colorNumberTypeOdd,
+        Adapter = new NumberListAdapter(data, colorNumberTypeEven, colorNumberTypeOdd,
                 (Integer value) -> {
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -76,10 +78,10 @@ public class ListFragment extends Fragment {
                 });
         LayoutManager = new GridLayoutManager(getActivity(), columnCount);
         listView.setLayoutManager(LayoutManager);
-        listView.setAdapter(list.NumberListAdapter);
+        listView.setAdapter(Adapter);
 
         Button addListElemBtn = view.findViewById(R.id.add_list_elem_btn);
-        addListElemBtn.setOnClickListener(v -> list.NumberListAdapter.insertElem());
+        addListElemBtn.setOnClickListener(v -> Adapter.insertElem());
 
         return view;
     }
@@ -87,7 +89,7 @@ public class ListFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putIntegerArrayList(LIST_DATA_BUNDLE_PART, Data);
+        outState.putIntegerArrayList(LIST_DATA_BUNDLE_PART, Adapter.getData());
     }
 
     @Override
@@ -98,7 +100,7 @@ public class ListFragment extends Fragment {
             Resources res = context.getResources();
             LayoutManager.setSpanCount(res.getInteger(R.integer.listColumnCount));
         } else {
-            Log.w(getLogTag(), "ListFragment has null activity attached");
+            Log.w(LOG_TAG, "ListFragment has null activity attached");
         }
     }
 
@@ -109,9 +111,5 @@ public class ListFragment extends Fragment {
 
         fragment.setArguments(bundle);
         return fragment;
-    }
-
-    private static String getLogTag() {
-        return "ListFragment";
     }
 }
