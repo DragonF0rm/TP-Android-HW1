@@ -31,7 +31,7 @@ public class ListFragment extends Fragment {
     private static final String LIST_DATA_BUNDLE_PART = "dataArrayList";
     private static final String LOG_TAG = "ListFragment";
     private GridLayoutManager LayoutManager;
-    private NumberListAdapter Adapter;
+    private NumberListAdapter Adapter = null;
 
     @Nullable
     @Override
@@ -57,12 +57,16 @@ public class ListFragment extends Fragment {
 
         ArrayList<Integer> data;
         if (savedInstanceState == null) {
-            data = new ArrayList<>();
-            for (int i = 1; i < 100; i++) {
-                data.add(i);
+            if(Adapter == null) {
+                data = new ArrayList<>();
+                for (int i = 1; i < 100; i++) {
+                    data.add(i);
+                }
+            } else {
+                data = Adapter.getData();
             }
         } else {
-           data = savedInstanceState.getIntegerArrayList(LIST_DATA_BUNDLE_PART);
+            data = savedInstanceState.getIntegerArrayList(LIST_DATA_BUNDLE_PART);
         }
 
         RecyclerView listView = view.findViewById(R.id.list);
