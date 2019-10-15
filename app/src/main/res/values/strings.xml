@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TP-Android-HW1</string>
+    <string name="add_list_elem_btn_text">Add element to grid</string>
+</resources>

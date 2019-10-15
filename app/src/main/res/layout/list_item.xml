@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/minListElemHeight"
+    android:minWidth="@dimen/minListElemWidth">
+
+    <TextView
+        android:id="@+id/list_elem_text"
+        android:layout_width="@dimen/minListElemWidth"
+        android:layout_height="@dimen/minListElemHeight"
+        android:gravity="center"
+        android:textSize="@dimen/listElemTextSize"
+        tools:text="1"
+        tools:textColor="@color/colorNumberOdd">
+    </TextView>
+
+</LinearLayout>
